@@ -159,3 +159,46 @@ g_t_s = np.where(a > 7)
 print(g_t_s)
 replace = np.where(a > 7, -1, a)
 print(replace)
+
+rng = np.random.default_rng(seed = 42)
+uniform_floats = rng.random(3)
+normal_dist = rng.standard_normal((2,3))
+random_ints = rng.integers(1,11, size = 5)
+
+
+########1C#############
+matrix = np.ones((2,2))* 5
+result = matrix + 10
+
+matrix1 = np.array([[10,20,30],[40,50,60], [70,80,90]])
+
+row_vector = np.array([1,2,3])
+row_added = matrix + row_vector
+
+col_vector = np.arra([[1],[2],[3]])
+col_added = matrix + col_vector
+
+x = np.linspace(-2, 2, 5)
+y = np.linspace(-2, 2, 5)
+
+X, Y = np.meshgrid(x, y)
+
+# Broadcasting X and Y together to compute a 2D grid of values
+# Computes Z = X^2 + Y^2 for every spatial combination
+Z = X**2 + Y**2
+
+
+# Matrix where rows are samples and columns are features
+features = np.array([[100, 0.5],
+                     [200, 0.2],
+                     [150, 0.8],
+                     [300, 0.1]])
+
+# Calculate mean and std deviation for each feature column (axis=0)
+# Both metrics will have a shape of (2,)
+mean = np.mean(features, axis=0)
+std = np.std(features, axis=0)
+
+# Standardize: (X - mean) / std
+# The 1D arrays of shape (2,) broadcast cleanly over the (4, 2) matrix
+standardized_features = (features - mean) / std
