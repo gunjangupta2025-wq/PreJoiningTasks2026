@@ -52,6 +52,51 @@ print(adj_matrix)
 
 
 #####DEGREE######
+# Manually 
+graph = {
+    "Amit":  ["Riya", "Neha", "John", "Priya"],
+    "Riya":  ["Amit", "Neha", "Sara", "John"],
+    "Neha":  ["Amit", "Riya", "Sara", "Meena"],
+    "John":  ["Amit", "Riya", "Ali"],
+    "Sara":  ["Riya", "Neha", "Ali"],
+    "Ali":   ["Sara", "John"],
+    "Priya": ["Karan", "Ravi", "Amit"],
+    "Karan": ["Priya", "Meena"],
+    "Meena": ["Karan", "Ravi", "Neha"],
+    "Ravi":  ["Meena", "Priya"]
+}
+
+def get_degree(graph_data, node):
+    if node not in graph_data:
+        return 0
+    return len(graph_data[node])
+
+def get_neighbours(graph_data, node):
+    return graph_data.get(node, [])
+
+def is_connected_bfs(graph_data, start_node, target_node):
+    if start_node == target_node:
+        return True
+
+    if start_node not in graph_data or target_node not in graph_data:
+        return False
+
+    queue = [start_node]
+    visited = {start_node}
+
+    while queue:
+        current_node = queue.pop(0)
+        if current_node == target_node:
+            return True
+
+        for neighbour in graph_data[current_node]:
+            if neighbour not in visited:
+                visited.add(neighbour)
+                queue.append(neighbour)
+
+    return False
+
+# Built in Functions
 degree = dict(G.degree())
 print("Degree of each student:")
 for student, deg in degree.items():
